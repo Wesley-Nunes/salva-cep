@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import Welcome from "./pages/Welcome";
+import Home from "./pages/Home";
+
+import "./App.css";
+
+const NavBar = () => {
+  return (
+    <ul>
+      <li>
+        <a>Favoritos</a>
+      </li>
+      <li>
+        <a>Pesquisar</a>
+      </li>
+      <li>
+        <h3>Jack</h3>
+      </li>
+      <li>
+        <a>Sair</a>
+      </li>
+    </ul>
+  );
+};
 
 function App() {
+  // const {user} = useAuth(); Implementar hook aqui!
+  // const isLogged = user.isAuthenticated;
+  const isLogged = true;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {isLogged ? (
+        <>
+          <nav className="navWrapper">
+            <NavBar />
+          </nav>
+          <Home />
+        </>
+      ) : (
+        <Welcome />
+      )}
+    </>
   );
 }
 
