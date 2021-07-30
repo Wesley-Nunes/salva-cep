@@ -7,6 +7,9 @@ import Welcome from "./pages/Welcome";
 import Search from "./pages/Search";
 import Favorite from "./pages/Favorite";
 
+import { useAuth } from "./context/auth";
+import { useUser } from "./context/user";
+
 // Style
 import "./styles/global.css";
 
@@ -15,6 +18,11 @@ export const UnauthenticatedRoutes = () => {
 };
 
 export const AuthenticatedRoutes = () => {
+	const { logout } = useAuth();
+	const { getName } = useUser();
+
+	const name = getName();
+
 	return (
 		<Router>
 			<nav className="navWrapper">
@@ -26,13 +34,11 @@ export const AuthenticatedRoutes = () => {
 						<Link to="/favorite">Favoritos</Link>
 					</li>
 					<li>
-						{/*setName Here*/}
-						<h3>Jack</h3>
+						<h3>{name}</h3>
 					</li>
 
 					<li>
-						{/*HandleLogout Here*/}
-						<Link to="/welcome">Sair</Link>
+						<Link onClick={logout}>Sair</Link>
 					</li>
 				</ul>
 			</nav>
@@ -43,9 +49,6 @@ export const AuthenticatedRoutes = () => {
 				</Route>
 				<Route path="/favorite">
 					<Favorite />
-				</Route>
-				<Route path="/welcome">
-					<Welcome />
 				</Route>
 			</Switch>
 		</Router>
