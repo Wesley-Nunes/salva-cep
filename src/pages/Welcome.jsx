@@ -12,6 +12,9 @@ import Title from "../components/Title";
 import Description from "../components/Description";
 import TextFormAbstraction from "../components/TextFormAbstraction";
 
+import { useAuth } from "../context/auth";
+import { useUser } from "../context/user";
+
 const ShowTitleAndDescription = () => {
 	const title = `Olá, bem vindo(a) ao Salva CEP!`;
 	const message = `Digite seu nome, e clique em iniciar!`;
@@ -25,11 +28,13 @@ const ShowTitleAndDescription = () => {
 };
 
 const Login = () => {
+	const { login } = useAuth();
+	const { setName } = useUser();
+
 	return (
 		<Formik
 			initialValues={{
 				name: "",
-				isAuthenticated: false,
 			}}
 			validationSchema={Yup.object({
 				name: Yup.string()
@@ -37,27 +42,37 @@ const Login = () => {
 					.max(16, "O nome deve ter dezesseis(16) letras ou menos")
 					.required("O preenchimento desse campo é obrigatório"),
 			})}
-			onSubmit={(values) => {
-				const { name, isAuthenticated } = values;
+			onSubmit={
+				(values) => {
+					const { name } = values;
 
-				if (localStorage.getItem(name)) {
-					const dataInLocalStorage = JSON.parse(
-						localStorage.getItem(name)
-					);
-					localStorage.setItem(
-						name,
-						JSON.stringify({
-							...dataInLocalStorage,
-							isAuthenticated: true,
-						})
-					);
-				} else {
-					localStorage.setItem(
-						name,
-						JSON.stringify({ isAuthenticated: true })
-					);
+					login();
+					setName(name);
 				}
-			}}
+
+				//(values) => {
+
+				// const { name, isAuthenticated } = values;
+
+				// if (localStorage.getItem(name)) {
+				// 	const dataInLocalStorage = JSON.parse(
+				// 		localStorage.getItem(name)
+				// 	);
+				// 	localStorage.setItem(
+				// 		name,
+				// 		JSON.stringify({
+				// 			...dataInLocalStorage,
+				// 			isAuthenticated: true,
+				// 		})
+				// 	);
+				// } else {
+				// 	localStorage.setItem(
+				// 		name,
+				// 		JSON.stringify({ isAuthenticated: true })
+				// 	);
+				// }
+				// }
+			}
 		>
 			<Form className="littleVerticalMargin">
 				<TextFormAbstraction
@@ -65,7 +80,7 @@ const Login = () => {
 					name="name"
 					type="text"
 					placeholder="Digite seu nome aqui..."
-					btn="Iniciar"
+					btnname="Iniciar"
 				/>
 			</Form>
 		</Formik>
