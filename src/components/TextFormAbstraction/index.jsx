@@ -1,6 +1,11 @@
-import Button from "./components/Button";
+// Form manager
+import { useField } from "formik";
 
-import "./style.css";
+// Components
+import Button from "../Button";
+
+// Style
+import "../../styles/global.css";
 
 // This abstraction will handle any type of input that receives text
 const TextFormAbstraction = ({ label, ...props }) => {

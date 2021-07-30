@@ -1,4 +1,4 @@
-import "./style.css";
+import "../../styles/global.css";
 
 const Button = (props) => {
   const action = props.btn;

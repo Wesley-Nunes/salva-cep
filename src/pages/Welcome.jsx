@@ -5,7 +5,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 // Style
-import "./style.css";
+import "../styles/global.css";
 
 // Components
 import Title from "../components/Title";
