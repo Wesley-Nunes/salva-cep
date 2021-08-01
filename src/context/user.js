@@ -11,6 +11,7 @@ const UserProvider = (props) => {
 		setUserInfo({
 			name,
 			cep: userInfo.cep,
+			search: false,
 		});
 	};
 
@@ -22,6 +23,7 @@ const UserProvider = (props) => {
 		setUserInfo({
 			name: userInfo.name,
 			cep,
+			search: true,
 		});
 	};
 
@@ -38,6 +40,18 @@ const UserProvider = (props) => {
 		return cepInfo;
 	};
 
+	const setSearchStatus = (status) => {
+		setUserInfo({
+			name: userInfo.name,
+			cep: userInfo.cep,
+			search: status,
+		});
+	};
+
+	const getSearchStatus = () => {
+		return userInfo.search;
+	};
+
 	const userContextValue = {
 		setName,
 		getName,
@@ -45,6 +59,8 @@ const UserProvider = (props) => {
 		getCep,
 		setResult,
 		getResult,
+		setSearchStatus,
+		getSearchStatus,
 	};
 
 	useEffect(() => {
