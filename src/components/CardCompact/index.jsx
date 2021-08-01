@@ -1,5 +1,5 @@
-import Title from "../components/Title";
-import Description from "..components/Description";
+import Title from "../Title";
+import Description from "../Description";
 
 import "../../styles/global.css";
 
