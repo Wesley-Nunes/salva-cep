@@ -75,6 +75,29 @@ td {
   width: 20vw;
 }
 
+/* Cards */
+.cardWrapper {
+  background-color: aliceblue;
+
+  height: 15rem;
+  width: 40rem;
+
+  border-radius: 30px;
+
+  cursor: pointer;
+  transition: 0.3s ease all;
+}
+
+.cardWrapper:hover {
+  background-color: whitesmoke;
+
+  box-shadow: 0 0 2px 1px var(--hover-contrast-color);
+}
+
+.cardWrapper p {
+  font-size: 2rem;
+}
+
 /* Navigation Bar */
 .navWrapper {
   background-color: #333;
@@ -145,4 +168,8 @@ td {
 
 .mediumPadding {
   padding: 2rem;
+}
+
+.textInCenter {
+  text-align: center;
 }
