@@ -12,6 +12,10 @@ import Title from "../components/Title";
 import Description from "../components/Description";
 import TextFormAbstraction from "../components/TextFormAbstraction";
 
+import Result from "../pages/Result";
+
+import { useUser } from "../context/user";
+
 const ShowTitleAndDescription = () => {
 	const title = `Pesquisa de CEP`;
 	const message = `Digite o CEP, e clique em pesquisar!`;
@@ -25,6 +29,8 @@ const ShowTitleAndDescription = () => {
 };
 
 const SearchForm = () => {
+	const { setCep } = useUser();
+
 	return (
 		<Formik
 			initialValues={{
@@ -43,7 +49,8 @@ const SearchForm = () => {
 					.required("O preenchimento desse campo é obrigatório"),
 			})}
 			onSubmit={(values) => {
-				console.log(values);
+				const { cep } = values;
+				setCep(cep);
 			}}
 		>
 			<Form className="littleVerticalMargin">
@@ -52,7 +59,7 @@ const SearchForm = () => {
 					name="cep"
 					type="text"
 					placeholder="Digite o CEP aqui..."
-					btn="Pesquisar"
+					btnname="Pesquisar"
 				/>
 			</Form>
 		</Formik>
@@ -64,6 +71,8 @@ const Search = () => {
 		<main className="contentCentralized">
 			<ShowTitleAndDescription />
 			<SearchForm />
+			<hr />
+			<Result />
 		</main>
 	);
 };
