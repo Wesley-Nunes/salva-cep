@@ -52,6 +52,12 @@ const UserProvider = (props) => {
 		return userInfo.search;
 	};
 
+	const getDb = () => {
+		const user = getName();
+		const db = localStorage.getItem(user);
+		return db ? JSON.parse(db).map((cep) => cep) : [{}];
+	};
+
 	const userContextValue = {
 		setName,
 		getName,
@@ -61,15 +67,14 @@ const UserProvider = (props) => {
 		getResult,
 		setSearchStatus,
 		getSearchStatus,
+		getDb,
 	};
 
 	useEffect(() => {
-		const user = userInfo.name;
-		const bd = localStorage.getItem(user);
-		let dataInLocalStorage = [{}];
-		let dataChoosed = getResult();
+		const user = getName();
 
-		if (bd) dataInLocalStorage = JSON.parse(bd).map((cep) => cep);
+		let dataInLocalStorage = getDb();
+		let dataChoosed = getResult();
 
 		// Make validations and send data to localStorage
 		const hasValues = (obj) => Object.values(obj[0]).length > 1;
