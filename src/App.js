@@ -1,46 +1,13 @@
-import Welcome from "./pages/Welcome";
-import Home from "./pages/Home";
+import { AuthenticatedRoutes, UnauthenticatedRoutes } from "./routes";
 
-import "./App.css";
+import { useAuth } from "./context/auth";
 
-const NavBar = () => {
-  return (
-    <ul>
-      <li>
-        <a>Favoritos</a>
-      </li>
-      <li>
-        <a>Pesquisar</a>
-      </li>
-      <li>
-        <h3>Jack</h3>
-      </li>
-      <li>
-        <a>Sair</a>
-      </li>
-    </ul>
-  );
-};
+import Result from "./pages/Result";
 
 function App() {
-  // const {user} = useAuth(); Implementar hook aqui!
-  // const isLogged = user.isAuthenticated;
-  const isLogged = true;
+  const { loggedIn } = useAuth();
 
-  return (
-    <>
-      {isLogged ? (
-        <>
-          <nav className="navWrapper">
-            <NavBar />
-          </nav>
-          <Home />
-        </>
-      ) : (
-        <Welcome />
-      )}
-    </>
-  );
+  return loggedIn ? <AuthenticatedRoutes /> : <UnauthenticatedRoutes />;
 }
 
 export default App;
