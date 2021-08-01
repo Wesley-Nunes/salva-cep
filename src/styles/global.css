@@ -61,6 +61,20 @@ li {
   list-style: none;
 }
 
+th {
+  text-align: left;
+
+  background-color: #ddd;
+
+  width: 20vw;
+}
+
+td {
+  background-color: #fff;
+
+  width: 20vw;
+}
+
 /* Navigation Bar */
 .navWrapper {
   background-color: #333;
@@ -86,19 +100,23 @@ li {
 .navWrapper a:hover {
   text-decoration: underline;
 
-  background-color: hsl(272, 27%, 38%);
+  background-color: var(--hover-contrast-color);
 
-  border: 0.5rem solid hsl(271, 17%, 50%);
+  border: 0.5rem solid var(--contrast-color);
 }
 
 .navWrapper h3 {
   background-color: #333;
-  color: hsl(57, 100%, 91%);
+  color: var(--background-color);
 
-  border: thick dashed hsl(271, 17%, 50%);
+  border: thick dashed var(--contrast-color);
 }
 
 /* Common Styles */
+.borderWrapper {
+  border: 0.1rem solid var(--contrast-color);
+}
+
 .contentCentralized {
   display: flex;
   flex-direction: column;
@@ -109,10 +127,22 @@ li {
   width: 100vw;
 }
 
+.littlePadding {
+  padding: 1rem;
+}
+
 .littleVerticalMargin {
   margin: 1rem 0;
 }
 
 .mediumFontSize {
   font-size: 2rem;
+}
+
+.mediumMargin {
+  margin: 2rem;
+}
+
+.mediumPadding {
+  padding: 2rem;
 }
