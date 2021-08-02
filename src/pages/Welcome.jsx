@@ -1,19 +1,20 @@
-// Form manager
-import { Formik, Form } from "formik";
-
-// Error validation
-import * as Yup from "yup";
-
-// Style
-import "../styles/global.css";
-
 // Components
 import Title from "../components/Title";
 import Description from "../components/Description";
 import TextFormAbstraction from "../components/TextFormAbstraction";
 
+// Context hook
 import { useAuth } from "../context/auth";
 import { useUser } from "../context/user";
+
+// Error validation
+import * as Yup from "yup";
+
+// Form manager
+import { Formik, Form } from "formik";
+
+// Style
+import "../styles/global.css";
 
 const ShowTitleAndDescription = () => {
 	const title = `Olá, bem vindo(a) ao Salva CEP!`;
@@ -42,37 +43,12 @@ const Login = () => {
 					.max(16, "O nome deve ter dezesseis(16) letras ou menos")
 					.required("O preenchimento desse campo é obrigatório"),
 			})}
-			onSubmit={
-				(values) => {
-					const { name } = values;
+			onSubmit={(values) => {
+				const { name } = values;
 
-					login();
-					setName(name);
-				}
-
-				//(values) => {
-
-				// const { name, isAuthenticated } = values;
-
-				// if (localStorage.getItem(name)) {
-				// 	const dataInLocalStorage = JSON.parse(
-				// 		localStorage.getItem(name)
-				// 	);
-				// 	localStorage.setItem(
-				// 		name,
-				// 		JSON.stringify({
-				// 			...dataInLocalStorage,
-				// 			isAuthenticated: true,
-				// 		})
-				// 	);
-				// } else {
-				// 	localStorage.setItem(
-				// 		name,
-				// 		JSON.stringify({ isAuthenticated: true })
-				// 	);
-				// }
-				// }
-			}
+				login();
+				setName(name);
+			}}
 		>
 			<Form className="littleVerticalMargin">
 				<TextFormAbstraction

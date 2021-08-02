@@ -1,3 +1,4 @@
+// Style
 import "../../styles/global.css";
 
 const Button = (props) => {

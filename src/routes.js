@@ -1,3 +1,13 @@
+// Context hook
+import { useAuth } from "./context/auth";
+import { useUser } from "./context/user";
+
+// Pages
+import Welcome from "./pages/Welcome";
+import Search from "./pages/Search";
+import Result from "./pages/Result";
+import Favorite from "./pages/Favorite";
+
 // React
 import React from "react";
 import {
@@ -8,15 +18,6 @@ import {
 	Redirect,
 } from "react-router-dom";
 
-// Pages
-import Welcome from "./pages/Welcome";
-import Search from "./pages/Search";
-import Result from "./pages/Result";
-import Favorite from "./pages/Favorite";
-
-import { useAuth } from "./context/auth";
-import { useUser } from "./context/user";
-
 // Style
 import "./styles/global.css";
 
@@ -25,7 +26,7 @@ export const UnauthenticatedRoutes = () => {
 };
 
 export const AuthenticatedRoutes = () => {
-	const { logout } = useAuth();
+	const { loggedIn, logout } = useAuth();
 	const { getName, getSearchStatus } = useUser();
 	const name = getName();
 	const status = getSearchStatus();
@@ -46,10 +47,11 @@ export const AuthenticatedRoutes = () => {
 						</li>
 
 						<li>
-							<Link onClick={logout}>Sair</Link>
+							<h4 onClick={logout}>Sair</h4>
 						</li>
 					</ul>
 				</nav>
+				{loggedIn ? <Redirect to="/" /> : null}
 				{status ? <Redirect to="/result" /> : null}
 			</>
 

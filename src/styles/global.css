@@ -120,7 +120,8 @@ ul {
 }
 
 .navWrapper a,
-.navWrapper h3 {
+.navWrapper h3,
+.navWrapper h4 {
   font-size: 2.8rem;
   text-align: center;
   text-decoration: none;
@@ -134,12 +135,16 @@ ul {
   padding: 0.5rem 10rem;
 }
 
-.navWrapper a:hover {
+.navWrapper a:hover,
+.navWrapper h4:hover {
   text-decoration: underline;
 
   background-color: var(--hover-contrast-color);
 
   border: 0.5rem solid var(--contrast-color);
+
+  cursor: pointer;
+  transition: 0.2s ease all;
 }
 
 .navWrapper h3 {

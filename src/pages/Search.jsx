@@ -1,20 +1,19 @@
-// Form manager
-import { Formik, Form } from "formik";
-
-// Error validation
-import * as Yup from "yup";
-
-// Style
-import "../styles/global.css";
-
 // Components
 import Title from "../components/Title";
 import Description from "../components/Description";
 import TextFormAbstraction from "../components/TextFormAbstraction";
 
-import Result from "../pages/Result";
-
+// Context hook
 import { useUser } from "../context/user";
+
+// Error validation
+import * as Yup from "yup";
+
+// Form manager
+import { Formik, Form } from "formik";
+
+// Style
+import "../styles/global.css";
 
 const ShowTitleAndDescription = () => {
 	const title = `Pesquisa de CEP`;
@@ -29,7 +28,12 @@ const ShowTitleAndDescription = () => {
 };
 
 const SearchForm = () => {
-	const { setCep } = useUser();
+	const { getSearchStatus, setSearchStatus, setCep } = useUser();
+
+	// Reset the Search status
+	(() => {
+		if (getSearchStatus()) setSearchStatus(false);
+	})();
 
 	return (
 		<Formik
@@ -71,8 +75,6 @@ const Search = () => {
 		<main className="contentCentralized">
 			<ShowTitleAndDescription />
 			<SearchForm />
-			<hr />
-			<Result />
 		</main>
 	);
 };

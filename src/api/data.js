@@ -1,19 +1,27 @@
+// Api request
 import Request from "./request";
 
-const data = () => {
-	let cleanedData = [];
+// Context hook
+import { useUser } from "../context/user";
 
-	const { cep, logradouro, bairro, localidade, uf } = Request();
+// To keep the app integrity make the api request only here,  if will need
+// to change the api, this function have to export the data in same format
+const Data = () => {
+	const { getCep } = useUser();
+	const actualCep = getCep();
 
-	cleanedData.push({
-		cep,
-		logradouro,
-		bairro,
-		cidade: localidade,
-		estado: uf,
-	});
+	const { cep, logradouro, bairro, localidade, uf } = Request(actualCep);
+	const formatedData = [
+		{
+			cep,
+			logradouro,
+			bairro,
+			cidade: localidade,
+			estado: uf,
+		},
+	];
 
-	return cleanedData;
+	return formatedData;
 };
 
-export default data;
+export default Data;

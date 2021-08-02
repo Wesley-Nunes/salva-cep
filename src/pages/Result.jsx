@@ -1,5 +1,5 @@
 // Api data
-import data from "../api/data";
+import Data from "../api/data";
 
 // Components
 import Button from "../components/Button";
@@ -13,7 +13,7 @@ import "../styles/global.css";
 
 const Result = () => {
 	const { setResult } = useUser();
-	const values = data().map((e) => e);
+	const values = Data().map((e) => e);
 
 	const handleClick = () => {
 		// Send values to localStorage

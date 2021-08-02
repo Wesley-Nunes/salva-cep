@@ -1,8 +1,8 @@
-import { AuthenticatedRoutes, UnauthenticatedRoutes } from "./routes";
-
+// Context hook
 import { useAuth } from "./context/auth";
 
-import Result from "./pages/Result";
+// React
+import { AuthenticatedRoutes, UnauthenticatedRoutes } from "./routes";
 
 function App() {
   const { loggedIn } = useAuth();

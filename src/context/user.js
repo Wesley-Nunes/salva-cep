@@ -1,3 +1,4 @@
+// React
 import { createContext, useContext, useState, useEffect } from "react";
 
 const UserContext = createContext({});
@@ -53,25 +54,26 @@ const UserProvider = (props) => {
 	};
 
 	const setDb = (db) => {
-		const user = getName();
-		localStorage.setItem(user, JSON.stringify(db));
+		const name = getName();
+		const validDb = db.length === 0 ? [{}] : db;
+		localStorage.setItem(name, JSON.stringify(validDb));
 	};
 
 	const getDb = () => {
-		const user = getName();
-		const db = localStorage.getItem(user);
+		const name = getName();
+		const db = localStorage.getItem(name);
+
 		return db ? JSON.parse(db).map((cep) => cep) : [{}];
 	};
 
 	const removeCep = (cepInfo) => {
-		const name = getName();
-		const db = getDb();
-		const novoDb = db.filter((InternalCep) => {
-			if (JSON.stringify(InternalCep) !== JSON.stringify(cepInfo)) {
-				return InternalCep;
-			}
-		});
-		setDb(novoDb);
+		const db = getDb().filter(
+			(InternalCep) =>
+				JSON.stringify(InternalCep) !== JSON.stringify(cepInfo)
+		);
+		const validDb = db.length === 0 ? [{}] : db;
+
+		setDb(validDb);
 		setNewData(true);
 	};
 
@@ -91,30 +93,36 @@ const UserProvider = (props) => {
 
 	useEffect(() => {
 		let dataInLocalStorage = getDb();
-		let dataChoosed = getResult();
+		let cepSearched = getResult();
 
-		// Make validations and send data to localStorage
+		// Make validations
 		const hasValues = (obj) => Object.values(obj[0]).length > 1;
-		if (hasValues(dataChoosed)) {
-			let arr = Object.values(dataChoosed[0]);
+		// The conditional only will be start if exist values in search
+		if (hasValues(cepSearched)) {
+			let arr = Object.values(cepSearched[0]);
+			// The database only will be change, if the user insert valid values
 			if (!arr.some((e) => typeof e === "undefined")) {
 				let newLocalStorageData = [];
 
-				if (!hasValues(dataInLocalStorage) && hasValues(dataChoosed)) {
-					newLocalStorageData.push(...dataChoosed);
+				if (!hasValues(dataInLocalStorage) && hasValues(cepSearched)) {
+					newLocalStorageData.push(...cepSearched);
 				}
 
-				if (hasValues(dataInLocalStorage) && hasValues(dataChoosed)) {
-					dataInLocalStorage.map((data) => {
-						if (data["cep"] === dataChoosed[0]["cep"]) {
-							dataChoosed = [{}];
+				if (hasValues(dataInLocalStorage) && hasValues(cepSearched)) {
+					dataInLocalStorage.forEach((data) => {
+						// If the cep searched exists in db don't add another copy
+						if (data["cep"] === cepSearched[0]["cep"]) {
+							cepSearched = [{}];
 						}
 					});
+
 					newLocalStorageData.push(...dataInLocalStorage);
-					if (hasValues(dataChoosed)) {
-						newLocalStorageData.push(...dataChoosed);
+
+					if (hasValues(cepSearched)) {
+						newLocalStorageData.push(...cepSearched);
 					}
 				}
+				// Set the validated data to local storage
 				setDb(newLocalStorageData);
 			}
 		}

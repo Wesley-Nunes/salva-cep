@@ -1,20 +1,20 @@
-import { useUser } from "../context/user";
-
+// React
 import { useEffect, useState } from "react";
+
+// Promise-based HTTP Client
 import axios from "axios";
 
-const Request = () => {
+const Request = (cep) => {
 	const [data, setData] = useState([]);
 	const ROOT_URL = "https://viacep.com.br/ws";
-	const { getCep } = useUser();
-	const cep = getCep();
+	const actualCep = cep;
 
 	useEffect(() => {
 		axios
-			.get(`${ROOT_URL}/${cep}/json/`)
+			.get(`${ROOT_URL}/${actualCep}/json/`)
 			.then(({ data }) => setData(data))
 			.catch(console.error);
-	}, [cep]);
+	}, [actualCep]);
 
 	return data;
 };

@@ -10,7 +10,6 @@ import "../../styles/global.css";
 
 const CardWrapper = () => {
 	const { getDb, removeCep } = useUser();
-	const name = "Remover";
 
 	return (
 		<div className="grid mediumPadding">
@@ -22,7 +21,7 @@ const CardWrapper = () => {
 					>
 						<CardFull fields={result} />
 						<Button
-							btnname={name}
+							btnname="Remover"
 							onclick={() => {
 								if (window.confirm("Remover CEP?")) {
 									removeCep(result);
