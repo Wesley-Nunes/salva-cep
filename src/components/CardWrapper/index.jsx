@@ -9,7 +9,7 @@ import { useUser } from "../../context/user";
 import "../../styles/global.css";
 
 const CardWrapper = () => {
-	const { getDb } = useUser();
+	const { getDb, removeCep } = useUser();
 	const name = "Remover";
 
 	return (
@@ -21,7 +21,10 @@ const CardWrapper = () => {
 						className="cardWrapper textInCenter littlePadding"
 					>
 						<CardFull fields={result} />
-						<Button btnname={name} />
+						<Button
+							btnname={name}
+							onclick={() => removeCep(result)}
+						/>
 					</div>
 				);
 			})}

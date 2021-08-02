@@ -52,10 +52,27 @@ const UserProvider = (props) => {
 		return userInfo.search;
 	};
 
+	const setDb = (db) => {
+		const user = getName();
+		localStorage.setItem(user, JSON.stringify(db));
+	};
+
 	const getDb = () => {
 		const user = getName();
 		const db = localStorage.getItem(user);
 		return db ? JSON.parse(db).map((cep) => cep) : [{}];
+	};
+
+	const removeCep = (cepInfo) => {
+		const name = getName();
+		const db = getDb();
+		const novoDb = db.filter((InternalCep) => {
+			if (JSON.stringify(InternalCep) !== JSON.stringify(cepInfo)) {
+				return InternalCep;
+			}
+		});
+		setDb(novoDb);
+		setNewData(true);
 	};
 
 	const userContextValue = {
@@ -67,12 +84,12 @@ const UserProvider = (props) => {
 		getResult,
 		setSearchStatus,
 		getSearchStatus,
+		setDb,
 		getDb,
+		removeCep,
 	};
 
 	useEffect(() => {
-		const user = getName();
-
 		let dataInLocalStorage = getDb();
 		let dataChoosed = getResult();
 
@@ -98,7 +115,7 @@ const UserProvider = (props) => {
 						newLocalStorageData.push(...dataChoosed);
 					}
 				}
-				localStorage.setItem(user, JSON.stringify(newLocalStorageData));
+				setDb(newLocalStorageData);
 			}
 		}
 		setNewData(false);
