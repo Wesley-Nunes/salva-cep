@@ -23,7 +23,11 @@ const CardWrapper = () => {
 						<CardFull fields={result} />
 						<Button
 							btnname={name}
-							onclick={() => removeCep(result)}
+							onclick={() => {
+								if (window.confirm("Remover CEP?")) {
+									removeCep(result);
+								}
+							}}
 						/>
 					</div>
 				);
