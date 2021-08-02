@@ -61,6 +61,10 @@ li {
   list-style: none;
 }
 
+main {
+  padding: 8rem 0;
+}
+
 th {
   text-align: left;
 
@@ -75,14 +79,20 @@ td {
   width: 20vw;
 }
 
+ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+  height: 100%;
+}
+
 /* Cards */
 .cardWrapper {
   background-color: aliceblue;
 
-  height: 15rem;
-  width: 40rem;
-
-  border-radius: 30px;
+  border-radius: 3px;
 
   cursor: pointer;
   transition: 0.3s ease all;
@@ -102,7 +112,11 @@ td {
 .navWrapper {
   background-color: #333;
 
-  overflow: hidden;
+  position: fixed;
+  top: 0;
+
+  width: 100vw;
+  height: 6rem;
 }
 
 .navWrapper a,
@@ -147,7 +161,17 @@ td {
   align-items: center;
 
   height: 75vh;
-  width: 100vw;
+  width: 99vw;
+}
+
+.grid {
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(3, 1fr);
+
+  grid-gap: 5%;
+
+  width: 100%;
+  height: 90%;
 }
 
 .littlePadding {
@@ -172,4 +196,54 @@ td {
 
 .textInCenter {
   text-align: center;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 1200px) {
+  main {
+    padding: 18rem 0;
+  }
+
+  .grid,
+  ul {
+    display: grid;
+    grid-gap: 2%;
+    grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+
+    padding: 2rem;
+  }
+
+  .navWrapper {
+    height: 14rem;
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    padding: 28rem 0;
+  }
+  .contentCentralized {
+    display: block;
+
+    height: 100vh;
+    width: 90vw;
+
+    margin: auto;
+  }
+
+  .grid,
+  ul {
+    grid-template: repeat(1, 1fr) / repeat(1, 1fr);
+  }
+
+  .navWrapper {
+    height: 25rem;
+  }
+
+  .navWrapper h3 {
+    border: none;
+    border-bottom: thick solid var(--contrast-color);
+  }
 }
